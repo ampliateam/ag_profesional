@@ -1,5 +1,5 @@
 import { IConfigMensajeriaProfesional } from '@global/models/interfaces';
-import * as repository from '../repository';
+import * as repository from '../repository/mongodb';
 import {
     ActualizarConfigMensajeriaProfesionalDTO,
     BuscarConfigMensajeriaProfesionalDTO,

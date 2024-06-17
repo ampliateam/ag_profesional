@@ -5,7 +5,7 @@ import {
     ActualizarConfigMensajeriaProfesionalDTO,
     BuscarConfigMensajeriaProfesionalDTO,
     CrearConfigMensajeriaProfesionalDTO
-} from "../dto";
+} from "../../dto";
 
 export const crear = async (dto: CrearConfigMensajeriaProfesionalDTO): Promise<IConfigMensajeriaProfesional> => {
     const modelMongoDB = await ConfigMensajeriaProfesionalModel.create(dto.configMensajeriaProfesional);

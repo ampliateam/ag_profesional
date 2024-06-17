@@ -1,5 +1,5 @@
 import { IProfesional } from "@global/models/interfaces";
-import { ActualizarProfesionalDTO, BuscarProfesionalDTO, CrearProfesionalDTO } from "../dto";
+import { ActualizarProfesionalDTO, BuscarProfesionalDTO, CrearProfesionalDTO } from "../../dto";
 import { ProfesionalModel } from "@domain/_connections/mongodb";
 import { mongoToProfesional } from "@domain/_helpers";
 

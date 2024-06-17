@@ -4,7 +4,7 @@ import {
     BuscarProfesionalDTO,
     ActualizarProfesionalDTO,
 } from '../dto';
-import * as repository from '../repository';
+import * as repository from '../repository/mongodb';
 
 export const crear = async (dto: CrearProfesionalDTO): Promise<IProfesional> => {
     return await repository.crud.crear(dto);

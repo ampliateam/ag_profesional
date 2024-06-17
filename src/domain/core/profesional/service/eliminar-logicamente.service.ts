@@ -1,6 +1,6 @@
 import { IProfesional } from "@global/models/interfaces";
 import { EliminarLogicamenteProfesionalDTO } from "../dto";
-import * as repository from '../repository';
+import * as repository from '../repository/mongodb';
 
 export const eliminarLogicamente = async (dto: EliminarLogicamenteProfesionalDTO): Promise<IProfesional> => {
     return await repository.crud.actualizar({
