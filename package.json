@@ -1,7 +1,6 @@
 {
   "name": "ag_profesional",
   "scripts": {
-    "cl": "docker-compose -f docker-compose-conexion-local.yml up",
     "dev": "nodemon",
     "test": "cross-env MODO_TEST=true jest",
     "start:dev": "",

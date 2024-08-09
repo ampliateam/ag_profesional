@@ -25,7 +25,7 @@ describe('CRUD - Profesional', () => {
                 id: idProfesional,
                 idUsuario,
                 contactos: [{
-                    codigoAccesoInternacional: '+595',
+                    codigoTelefono: '+595',
                     contacto: '982139653',
                     tipo: 'telefono-movil',
                     prioridad: 'principal'
