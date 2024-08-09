@@ -5,7 +5,7 @@ import {
 } from "@global/models/types";
 
 interface IProfesionalContacto {
-    codigoAccesoInternacional: string | null;
+    codigoTelefono: string | null;
     contacto: string;
     tipo: TProfesionalContactoTipo;
     prioridad: TProfesionalContactoPrioridad;

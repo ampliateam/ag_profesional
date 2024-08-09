@@ -15,6 +15,6 @@ export const envs = {
     mongoURI: process.env.MONGO_URI,
 };
 
-if (envs.modoTest && envs.environment !== 'local_development') {
+if (envs.modoTest && envs.environment !== 'personal') {
     throw new Error('El sistema no puede estar en modo test en entornos remotos.');
 }
