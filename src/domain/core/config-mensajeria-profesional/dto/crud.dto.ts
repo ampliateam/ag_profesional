@@ -8,7 +8,7 @@ export interface CrearConfigMensajeriaProfesionalDTO {
 }
 
 export interface BuscarConfigMensajeriaProfesionalDTO {
-  id?: string;
+  _id?: string;
   idUsuario?: string;
   idProfesional?: string;
 }

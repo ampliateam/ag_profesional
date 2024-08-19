@@ -3,6 +3,7 @@ import { constants } from '@global/configs/constants';
 
 // Guardar el valor por defecto de cada campo aqui
 const defaultValue = {
+  _id: () => new Types.ObjectId().toHexString(),
   packMensajeria: {
     correo: {
       totalHistorico: 0,
@@ -38,6 +39,7 @@ const defaultValue = {
 
 const ConfigMensajeriaProfesionalSchema = new Schema(
   {
+    _id: { type: Schema.Types.Mixed, default: defaultValue._id },
     idUsuario: { type: String, required: true, unique: true },
     idProfesional: { type: String, required: true, unique: true },
     packMensajeria: { type: Object, required: false, default: defaultValue.packMensajeria },
@@ -49,19 +51,10 @@ const ConfigMensajeriaProfesionalSchema = new Schema(
     fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
   },
   {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
     versionKey: false,
+    _id: false,
   }
 );
-
-// Duplicate the ID field.
-ConfigMensajeriaProfesionalSchema.virtual('id').set(function (v: string) {
-  this._id = new Types.ObjectId(v);
-});
-ConfigMensajeriaProfesionalSchema.virtual('id').get(function () {
-  return this._id.toHexString();
-});
 
 export const ConfigMensajeriaProfesionalModel = model(
   constants.nombreStore.configMensajeriaProfesional,

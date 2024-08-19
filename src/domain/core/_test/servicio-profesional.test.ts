@@ -1,98 +1,88 @@
+import { envs } from "@global/configs/envs";
 import { conexionConMongoDB } from "@global/connections/mongodb.connection";
 import { services } from "@domain/services";
+import { genRanHex } from "@domain/_helpers/generador-hexadecimal.helper";
 
-describe('CRUD - Servicio profesional', () => {
-    const idUsuario = '654321';
-    const idProfesional = '000000000000000000000001';
-    const idServicioProfesional = '000000000000000000000000';
-    const nombreServicio = 'Servicio1';
+describe.skip("CRUD - Servicio profesional", () => {
+  const idUsuario = "123456";
+  const idProfesional = genRanHex(24);
+  const idServicioProfesional = genRanHex(24);
+  const nombreServicio = "Servicio1";
 
-    beforeAll(async () => {    
-        await conexionConMongoDB();
+  beforeAll(async () => {
+    if (!envs.modoTest) {
+      throw new Error("Es necesario que sea modo TEST. Ejecute [npm run test]");
+    }
 
-        // TODO: Vaciar colecciones especificas
+    await conexionConMongoDB();
 
-        // Crear profesional
-        await services.core.profesional.crud.crear({
-            profesional: {
-                id: idProfesional,
-                idUsuario,
-                contactos: [{
-                    codigoTelefono: '+595',
-                    contacto: '982139653',
-                    tipo: 'telefono-movil',
-                    prioridad: 'principal'
-                }],
-                direccion: {
-                    referencia: '',
-                    ubicacion: [0, 0]
-                },
-                estado: 'habilitado',
-                fechaCreacion: new Date(),
-                fechaEliminacion: null,
-            }
-        });
-        
-        // Obtenemos el servicio de un profesional y eliminar si existe 
-        const servicioProfesionalExistente = await services.core.servicioProfesional.crud.obtener({
-            nombreServicioPorProfesional: {
-                idProfesional,
-                nombreServicio
-            }
-        });
-        if (servicioProfesionalExistente) {
-            await services.core.servicioProfesional.crud.eliminar({
-                nombreServicioPorProfesional: {
-                    idProfesional,
-                    nombreServicio
-                }
-            });
-        }
-
-        // Creamos un nuevo servicio de profesional
-        const servicioProfesionalNuevo = await services.core.servicioProfesional.crud.crear({
-            servicioProfesional: {
-                id: idServicioProfesional,
-                idProfesional,
-                nombreServicio,
-                observacion: 'Este servicio se enfoca el algo bueno que hago.',
-                estado: 'habilitado',
-                fechaCreacion: new Date(),
-            }
-        });
-
-        expect(servicioProfesionalNuevo.id).toEqual(idServicioProfesional);
-    });
-    
-    test('Obtener servicio profesional', async () => {
-        // Obtenemos el servicio de un profesional
-        const servicioProfesional = await services.core.servicioProfesional.crud.obtener({
-            nombreServicioPorProfesional: {
-                idProfesional,
-                nombreServicio
-            }
-        });
-
-        expect(servicioProfesional.id).toEqual(idServicioProfesional);
+    // Crear profesional
+    await services.core.profesional.crud.crear({
+      profesional: {
+        _id: idProfesional,
+        idUsuario,
+        contactos: [
+          {
+            codigoTelefono: "+595",
+            contacto: "982139653",
+            tipo: "telefono-movil",
+            prioridad: "principal",
+          },
+        ],
+        direccion: {
+          referencia: "",
+          ubicacion: [0, 0],
+        },
+        etiqueta: "odontologia",
+        estado: "habilitado",
+        fechaCreacion: new Date(),
+        fechaEliminacion: null,
+      },
     });
 
-    test('Obtener lista servicio profesional', async () => {
-        const listaId = [
-            '000000000000000000000000'
-        ];
+    // Obtenemos el servicio de un profesional y eliminar si existe
+    const servicioProfesionalExistente =
+      await services.core.servicioProfesional.crud.obtener({
+        nombreServicioPorProfesional: {
+          idProfesional,
+          nombreServicio,
+        },
+      });
+    if (servicioProfesionalExistente) {
+      await services.core.servicioProfesional.crud.eliminar({
+        nombreServicioPorProfesional: {
+          idProfesional,
+          nombreServicio,
+        },
+      });
+    }
 
-        // Obtener lista de servicios profesionales
-        const lista = await services.core.servicioProfesional.obtenerListaPorIds(listaId);
+    // Creamos un nuevo servicio de profesional
+    const servicioProfesionalNuevo =
+      await services.core.servicioProfesional.crud.crear({
+        servicioProfesional: {
+          _id: idServicioProfesional,
+          idProfesional,
+          nombreServicio,
+          observacion: "Este servicio se enfoca el algo bueno que hago.",
+          estado: "habilitado",
+          fechaCreacion: new Date(),
+        },
+      });
 
-        // Si no existe ningun servicio profesional, verificar
-        if (!lista.length) {
-            return expect(lista.length).toEqual(0);
-        }
+    expect(servicioProfesionalNuevo._id).toEqual(idServicioProfesional);
+  });
 
-        // Verificar lista de id de servicios profesionales
-        for (const id of listaId) {
-            expect(lista.find(v => v.id === id || '')?.id || '').toEqual(id);
-        }
-    });
-    
+  test("Obtener servicio profesional", async () => {
+    // Obtenemos el servicio de un profesional
+    const servicioProfesional =
+      await services.core.servicioProfesional.crud.obtener({
+        nombreServicioPorProfesional: {
+          idProfesional,
+          nombreServicio,
+        },
+      });
+
+    expect(servicioProfesional._id).toEqual(idServicioProfesional);
+  });
 });

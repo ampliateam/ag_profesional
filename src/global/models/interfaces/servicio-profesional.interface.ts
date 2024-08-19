@@ -1,7 +1,7 @@
 import { TServicioProfesionalEstado } from '@global/models/types';
 
 export interface IServicioProfesional {
-    id: string;
+    _id: string;
     idProfesional: string;
     nombreServicio: string;
     observacion: string;
@@ -10,7 +10,7 @@ export interface IServicioProfesional {
 }
 
 export interface IServicioProfesionalOpcional {
-    id?: string;
+    _id?: string;
     idProfesional?: string;
     nombreServicio?: string;
     observacion?: string;
