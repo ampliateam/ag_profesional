@@ -1,7 +1,8 @@
 import {
     TProfesionalContactoPrioridad,
     TProfesionalContactoTipo,
-    TProfesionalEstado
+    TProfesionalEstado,
+    TProfesionalEtiqueta,
 } from "@global/models/types";
 
 interface IProfesionalContacto {
@@ -17,20 +18,22 @@ interface IProfesionalDireccion {
 }
 
 export interface IProfesional {
-    id: string;
+    _id: string;
     idUsuario: string;
     contactos: IProfesionalContacto[];
     direccion: IProfesionalDireccion;
+    etiqueta: TProfesionalEtiqueta;
     estado: TProfesionalEstado;
     fechaCreacion: Date;
     fechaEliminacion: Date | null;
 }
 
 export interface IProfesionalOpcional {
-    id?: string;
+    _id?: string;
     idUsuario?: string;
     contactos?: IProfesionalContacto[];
     direccion?: IProfesionalDireccion;
+    etiqueta?: TProfesionalEtiqueta;
     estado?: TProfesionalEstado;
     fechaCreacion?: Date;
     fechaEliminacion?: Date | null;

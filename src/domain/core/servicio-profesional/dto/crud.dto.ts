@@ -8,7 +8,7 @@ export interface CrearServicioProfesionalDTO {
 }
 
 export interface BuscarServicioProfesionalDTO {
-    id?: string;
+    _id?: string;
     nombreServicioPorProfesional?: {
         idProfesional: string,
         nombreServicio: string,

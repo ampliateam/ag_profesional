@@ -1,22 +1,18 @@
 import { Schema, Types, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
 
+const defaultValue = {
+    _id: () => new Types.ObjectId().toHexString(),
+}
+
 const ParametroSistemaSchema = new Schema({
+    _id: { type: Schema.Types.Mixed, default: defaultValue._id },
     parametroBusqueda: { type: String, required: true, unique: true },
     valor: { type: String, required: true },
     observacion: { type: String, required: true },
 }, {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
     versionKey: false,
-});
-
-// Duplicate the ID field.
-ParametroSistemaSchema.virtual('id').set(function(v: string){
-    return this._id = new Types.ObjectId(v);
-});
-ParametroSistemaSchema.virtual('id').get(function(){
-    return this._id.toHexString();
+    _id: false,
 });
 
 export const ParametroSistemaModel = model(constants.nombreStore.parametroSistema, ParametroSistemaSchema);

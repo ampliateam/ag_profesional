@@ -30,7 +30,7 @@ interface IRecordatorioManualParaCliente {
 
 // Los mensajes por correo ya vienen con el plan basico
 export interface IConfigMensajeriaProfesional {
-  id: string;
+  _id: string;
   idUsuario: string;
   idProfesional: string;
   packMensajeria: IPackMensajeria;
@@ -39,7 +39,7 @@ export interface IConfigMensajeriaProfesional {
 }
 
 export interface IConfigMensajeriaProfesionalOpcional {
-  id?: string;
+  _id?: string;
   idUsuario?: string;
   idProfesional?: string;
   packMensajeria?: IPackMensajeria;

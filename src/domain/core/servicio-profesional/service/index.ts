@@ -1,2 +1,2 @@
 export * as crud from './crud.service';
-export * from './lista.service';
+export * as db from './db.service';

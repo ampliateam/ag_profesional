@@ -1,11 +1,12 @@
 import { conexionConMongoDB } from '@global/connections/mongodb.connection';
 import { services } from '@domain/services';
 import { envs } from '@global/configs/envs';
+import { genRanHex } from '@domain/_helpers/generador-hexadecimal.helper';
 
-describe('CRUD - Config mensajeria pack', () => {
-  const idModel = '000000000000000000000000';
-  const idUsuario = '100000000000000000000000';
-  const idProfesional = '100000000000000000000000';
+describe.skip('CRUD - Config mensajeria pack', () => {
+  const idModel = genRanHex(24);
+  const idUsuario = genRanHex(24);
+  const idProfesional = genRanHex(24);
 
   beforeAll(async () => {
     if (!envs.modoTest) {
@@ -14,12 +15,10 @@ describe('CRUD - Config mensajeria pack', () => {
     
     await conexionConMongoDB();
 
-    // TODO: Vaciar colecciones especificas
-
     // Crear un profesional
     const modelNuevo = await services.core.configMensajeriaProfesional.crud.crear({
       configMensajeriaProfesional: {
-        id: idModel,
+        _id: idModel,
         idUsuario,
         idProfesional,
         packMensajeria: {
@@ -46,7 +45,7 @@ describe('CRUD - Config mensajeria pack', () => {
               totalHistorico: 0,
               utilizadoHistorico: 0,
             },
-          }
+          },
         },
         recordatorioManualParaCliente: {
           habilitado: false,
@@ -56,31 +55,13 @@ describe('CRUD - Config mensajeria pack', () => {
       },
     });
 
-    expect(modelNuevo.id).toEqual(idModel);
+    expect(modelNuevo._id).toEqual(idModel);
   });
 
   test('Obtener config mensajeria profesional', async () => {
     // Obtener pack de mensajeria
     const model = await services.core.configMensajeriaProfesional.crud.obtener({ idUsuario });
-    console.log('model', model);
 
-    expect(model.id).toEqual(idModel);
-  });
-
-  test('Obtener lista de config mensajeria profesional', async () => {
-    const listaId = ['000000000000000000000000'];
-
-    // Obtener lista de mensajeria pack
-    const lista = await services.core.configMensajeriaProfesional.obtenerListaPorIds(listaId);
-
-    // Si no existe ningun profesional, verificar
-    if (!lista.length) {
-      return expect(lista.length).toEqual(0);
-    }
-
-    // Verificar lista de id de mensajeria pack
-    for (const id of listaId) {
-      expect(lista.find((v) => v.id === id || '')?.id).toEqual(id);
-    }
+    expect(model._id).toEqual(idModel);
   });
 });

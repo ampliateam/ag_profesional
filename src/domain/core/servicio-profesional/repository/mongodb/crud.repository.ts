@@ -5,14 +5,14 @@ import { mongoToServicioProfesional } from "@domain/_helpers";
 
 export const crear = async (dto: CrearServicioProfesionalDTO): Promise<IServicioProfesional> => {
     const modelMongoDB = await ServicioProfesionalModel.create(dto.servicioProfesional);
-    return await obtener({ id: modelMongoDB.id });
+    return await obtener({ _id: modelMongoDB._id.toString() });
 }
 
 export const obtener = async (dto: BuscarServicioProfesionalDTO): Promise<IServicioProfesional> => {
     // Proceso de filtracion
     const filtros:any = {};
-    if (dto.id) {
-        filtros._id = dto.id;
+    if (dto._id) {
+        filtros._id = dto._id;
     } else if (dto.nombreServicioPorProfesional) {
         filtros.idProfesional = dto.nombreServicioPorProfesional.idProfesional;
         filtros.nombreServicio = dto.nombreServicioPorProfesional.nombreServicio;
@@ -34,7 +34,7 @@ export const actualizar = async (dto: ActualizarServicioProfesionalDTO): Promise
     if (!servicioProfesional) return null;
 
     await ServicioProfesionalModel.updateOne({
-        _id: servicioProfesional.id
+        _id: servicioProfesional._id
     }, dto.actualizado);
 
     return Object.assign(servicioProfesional, dto.actualizado);
@@ -44,7 +44,7 @@ export const eliminar = async (dto: BuscarServicioProfesionalDTO): Promise<IServ
     const servicioProfesional: IServicioProfesional = await obtener(dto);
     if (!servicioProfesional) return null;
 
-    await ServicioProfesionalModel.findByIdAndDelete(servicioProfesional.id);
+    await ServicioProfesionalModel.findByIdAndDelete(servicioProfesional._id);
 
     return servicioProfesional;
 }

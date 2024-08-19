@@ -1,2 +1,3 @@
 export * as crud from './crud.repository';
-export * from './lista.repository';
+export * as db from './db.repository';
+

@@ -9,14 +9,14 @@ import {
 
 export const crear = async (dto: CrearConfigMensajeriaProfesionalDTO): Promise<IConfigMensajeriaProfesional> => {
     const modelMongoDB = await ConfigMensajeriaProfesionalModel.create(dto.configMensajeriaProfesional);
-    return await obtener({ id: modelMongoDB.id });
+    return await obtener({ _id: modelMongoDB._id.toString() });
 }
 
 export const obtener = async (dto: BuscarConfigMensajeriaProfesionalDTO): Promise<IConfigMensajeriaProfesional> => {
     // Proceso de filtracion
     const filtros:any = {};
-    if (dto.id) {
-        filtros._id = dto.id;
+    if (dto._id) {
+        filtros._id = dto._id;
     } else if (dto.idUsuario) {
         filtros.idUsuario = dto.idUsuario;
     } else if (dto.idProfesional) {
@@ -33,7 +33,7 @@ export const actualizar = async (dto: ActualizarConfigMensajeriaProfesionalDTO):
     if (!configMensajeriaProfesional) return null;
 
     await ConfigMensajeriaProfesionalModel.updateOne({
-        _id: configMensajeriaProfesional.id
+        _id: configMensajeriaProfesional._id
     }, dto.actualizado);
 
     return Object.assign(configMensajeriaProfesional, dto.actualizado);
