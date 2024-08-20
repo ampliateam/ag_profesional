@@ -1,9 +1,8 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
 
 // Guardar el valor por defecto de cada campo aqui
 const defaultValue = {
-  _id: () => new Types.ObjectId().toHexString(),
   packMensajeria: {
     correo: {
       totalHistorico: 0,
@@ -39,7 +38,6 @@ const defaultValue = {
 
 const ConfigMensajeriaProfesionalSchema = new Schema(
   {
-    _id: { type: Schema.Types.Mixed, default: defaultValue._id },
     idUsuario: { type: String, required: true, unique: true },
     idProfesional: { type: String, required: true, unique: true },
     packMensajeria: { type: Object, required: false, default: defaultValue.packMensajeria },
@@ -49,11 +47,7 @@ const ConfigMensajeriaProfesionalSchema = new Schema(
       default: defaultValue.recordatorioManualParaCliente,
     },
     fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
-  },
-  {
-    versionKey: false,
-    _id: false,
-  }
+  }, { versionKey: false }
 );
 
 export const ConfigMensajeriaProfesionalModel = model(

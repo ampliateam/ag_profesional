@@ -1,15 +1,13 @@
-import { Schema, Types, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
 
 // Guardar el valor por defecto de cada campo aqui
 const defaultValue = {
-    _id: () => new Types.ObjectId().toHexString(),
     direccion: { referencia: '', ubicacion: [0,0] },
     fechaEliminacion: null,
 };
 
 const ProfesionalSchema = new Schema({
-    _id: { type: Schema.Types.Mixed, default: defaultValue._id },
     idUsuario: { type: String, required: true },
     contactos: { type: Array, required: true },                                     // IProfesionalContacto[]
     direccion: { type: Object, required: false, default: defaultValue.direccion },  // IProfesionalDireccion
@@ -17,10 +15,7 @@ const ProfesionalSchema = new Schema({
     estado: { type: String, required: true },                                       // TProfesionalEstado
     fechaCreacion: { type: Date, required: true },
     fechaEliminacion: { type: Date, required: false, default: defaultValue.fechaEliminacion },
-}, {
-    versionKey: false,
-    _id: false,
-});
+}, { versionKey: false });
 
 // Crear un índice único compuesto
 ProfesionalSchema.index({ idUsuario: 1, etiqueta: 1, estado: 1 }, { unique: true });
