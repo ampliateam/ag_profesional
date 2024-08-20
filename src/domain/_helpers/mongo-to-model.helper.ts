@@ -7,7 +7,7 @@ import { IParametroSistema } from "@domain/_models/interfaces";
 
 const mongoToModel = (mongo: any) => {
     if (!mongo) return null;
-    console.log('mongo', mongo);
+
     const mongoObj = mongo.toObject();
     const mongoKeys = Object.keys(mongoObj);
 
