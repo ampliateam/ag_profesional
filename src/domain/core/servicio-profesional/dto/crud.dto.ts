@@ -1,10 +1,8 @@
-import {
-    IServicioProfesional,
-    IServicioProfesionalOpcional
-} from "@global/models/interfaces";
+import { IServicioProfesionalOpcional } from "@global/models/interfaces";
+import { TServicioProfesionalEstado } from "@global/models/types";
 
 export interface CrearServicioProfesionalDTO {
-    servicioProfesional: IServicioProfesional;
+    servicioProfesional: IServicioProfesionalOpcional;
 }
 
 export interface BuscarServicioProfesionalDTO {
@@ -12,6 +10,7 @@ export interface BuscarServicioProfesionalDTO {
     nombreServicioPorProfesional?: {
         idProfesional: string,
         nombreServicio: string,
+        estado: TServicioProfesionalEstado
     };
 }
 

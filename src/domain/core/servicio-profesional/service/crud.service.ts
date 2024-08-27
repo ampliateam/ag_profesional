@@ -17,7 +17,3 @@ export const obtener = async (dto: BuscarServicioProfesionalDTO): Promise<IServi
 export const actualizar = async (dto: ActualizarServicioProfesionalDTO): Promise<IServicioProfesional> => {
     return await repository.crud.actualizar(dto);
 }
-
-export const eliminar = async (dto: BuscarServicioProfesionalDTO): Promise<IServicioProfesional> => {
-    return await repository.crud.eliminar(dto);
-}

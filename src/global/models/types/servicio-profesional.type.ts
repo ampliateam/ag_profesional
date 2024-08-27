@@ -1,1 +1,1 @@
-export type TServicioProfesionalEstado = 'habilitado' | 'deshabilitado';
+export type TServicioProfesionalEstado = 'habilitado' | 'deshabilitado' | 'eliminado';

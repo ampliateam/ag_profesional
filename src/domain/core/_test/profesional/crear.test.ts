@@ -1,12 +1,11 @@
 import { envs } from "@global/configs/envs";
 import { conexionConMongoDB } from "@global/connections/mongodb.connection";
 import { services } from "@domain/services";
-import { genRanHex } from "@domain/_helpers/generador-hexadecimal.helper";
+import { testRun } from "../config";
 
-describe.skip("Crear - Profesional", () => {
+const describeTest = testRun.profesional.crear ? describe : describe.skip;
+describeTest("CRUD - Profesional", () => {
   const idUsuario = "123456";
-  const idProfesional = genRanHex(24);
-  console.log("idProfesional generado:", idProfesional);
 
   beforeAll(async () => {
     if (!envs.modoTest) {
@@ -16,33 +15,29 @@ describe.skip("Crear - Profesional", () => {
     await conexionConMongoDB();
   });
 
-  test("Crear profesional", async () => {
+  test("crear | profesional | crud", async () => {
     // Crear un profesional
     const profesionalNuevo = await services.core.profesional.crud.crear({
       profesional: {
-        _id: idProfesional,
         idUsuario,
         contactos: [
           {
             codigoTelefono: "+595",
             contacto: "982139653",
             tipo: "telefono-movil",
-            prioridad: "principal",
           },
         ],
         direccion: {
           referencia: "",
           ubicacion: [0, 0],
         },
-        etiqueta: "odontologia",
+        etiqueta: 'nutricion',
         estado: "habilitado",
         fechaCreacion: new Date(),
         fechaEliminacion: null,
       },
     });
-    console.log("Profesional nuevo creado:", profesionalNuevo);
 
     expect(profesionalNuevo).toBeTruthy();
-    expect(profesionalNuevo._id).toEqual(idProfesional);
   });
 });

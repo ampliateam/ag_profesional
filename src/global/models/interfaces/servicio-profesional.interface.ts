@@ -7,6 +7,7 @@ export interface IServicioProfesional {
     observacion: string;
     estado: TServicioProfesionalEstado;
     fechaCreacion: Date;
+    fechaEliminacion: Date | null;
 }
 
 export interface IServicioProfesionalOpcional {
@@ -16,4 +17,5 @@ export interface IServicioProfesionalOpcional {
     observacion?: string;
     estado?: TServicioProfesionalEstado;
     fechaCreacion?: Date;
+    fechaEliminacion?: Date | null;
 }

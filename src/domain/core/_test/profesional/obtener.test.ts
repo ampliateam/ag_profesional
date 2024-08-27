@@ -1,13 +1,15 @@
 import { envs } from "@global/configs/envs";
 import { conexionConMongoDB } from "@global/connections/mongodb.connection";
 import { services } from "@domain/services";
+import { testRun } from "../config";
 
-describe.skip("Obtener - Profesional", () => {
+const describeTest = testRun.profesional.obtener ? describe : describe.skip;
+describeTest("CRUD - Profesional", () => {
   const idUsuario = "123456";
-  const idsProfesional = [
-    '8ea34d4f8823222ba7568443',
-    '78bba42fb3cefdc98f8f6b3c',
-    'b8594eeba2d10a96dce0c69e',
+  const ids = [
+    '66cd19426e872951ab59711f',
+    '66cd19b355327e5ef7b9d377',
+    '66cd19cc7afd9105182e2232',
   ];
 
   beforeAll(async () => {
@@ -18,9 +20,9 @@ describe.skip("Obtener - Profesional", () => {
     await conexionConMongoDB();
   });
 
-  test("Obtener profesional - 1", () => {
+  test("obtener | profesional | crud", () => {
     // Obtener profesional
-    idsProfesional.map(async v => {
+    ids.map(async v => {
       const profesional = await services.core.profesional.crud.obtener({
         _id: v
       });
@@ -29,37 +31,36 @@ describe.skip("Obtener - Profesional", () => {
     });
   });
 
-  test("Obtener profesional - 2", async () => {
+  test("obtener | profesional | db-0", async () => {
     // Obtener profesional
     const profesionales = await services.core.profesional.db.obtener({
       $and: [
-        { _id: idsProfesional[0] },
+        { _id: ids[0] },
         { idUsuario },
       ]
     });
 
-    expect(profesionales[0]._id).toEqual(idsProfesional[0]);
+    expect(profesionales[0]._id).toEqual(ids[0]);
 
     profesionales.map(v => {
       expect(v._id).toBeTruthy();
     });
   });
 
-  test("Obtener profesional - 3", async () => {
+  test("obtener | profesional | db-1", async () => {
     // Obtener profesional
     const profesionalesExistentes = await services.core.profesional.db.obtener({
-      _id: { '$in': idsProfesional }
+      _id: { '$in': ids }
     });
 
-    profesionalesExistentes.map((v, i) => {
-      expect(v).toBeTruthy();
-      expect(idsProfesional).toContain(v._id);
+    profesionalesExistentes.map(v => {
+      expect(ids).toContain(v._id);
     });
   });
 
-  test("Obtener profesional - 4", () => {
+  test("obtener | profesional | db-2", () => {
     // Obtener profesional
-    idsProfesional.map(async v => {
+    ids.map(async v => {
       const profesional = await services.core.profesional.db.obtenerPorID(v);
 
       expect(profesional._id).toEqual(v);
