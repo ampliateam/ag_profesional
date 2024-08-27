@@ -1,11 +1,8 @@
-import {
-    IProfesional,
-    IProfesionalOpcional
-} from "@global/models/interfaces";
+import { IProfesionalOpcional } from "@global/models/interfaces";
 import { TProfesionalEtiqueta } from "@global/models/types";
 
 export interface CrearProfesionalDTO {
-    profesional: IProfesional;
+    profesional: IProfesionalOpcional;
 }
 
 export interface BuscarProfesionalDTO {

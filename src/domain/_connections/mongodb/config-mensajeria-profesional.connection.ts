@@ -38,15 +38,23 @@ const defaultValue = {
 
 const ConfigMensajeriaProfesionalSchema = new Schema(
   {
-    idUsuario: { type: String, required: true, unique: true },
+    idUsuario: { type: String, required: true },
     idProfesional: { type: String, required: true, unique: true },
-    packMensajeria: { type: Object, required: false, default: defaultValue.packMensajeria },
+    packMensajeria: {
+      type: Object,
+      required: false,
+      default: defaultValue.packMensajeria,
+    },
     recordatorioManualParaCliente: {
       type: Object,
       required: false,
       default: defaultValue.recordatorioManualParaCliente,
     },
-    fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
+    fechaCreacion: {
+      type: Date,
+      required: false,
+      default: defaultValue.fechaCreacion,
+    },
   }, { versionKey: false }
 );
 

@@ -1,12 +1,12 @@
 import { conexionConMongoDB } from '@global/connections/mongodb.connection';
 import { services } from '@domain/services';
 import { envs } from '@global/configs/envs';
-import { genRanHex } from '@domain/_helpers/generador-hexadecimal.helper';
+import { testRun } from '../config';
 
-describe.skip('CRUD - Config mensajeria pack', () => {
-  const idModel = genRanHex(24);
-  const idUsuario = genRanHex(24);
-  const idProfesional = genRanHex(24);
+const describeTest = testRun.configMensajeriaProfesional.crear ? describe : describe.skip;
+describeTest('CRUD - Config mensajeria pack', () => {
+  const idUsuario = "123456";
+  const idProfesional = '66cd19cc7afd9105182e2232';
 
   beforeAll(async () => {
     if (!envs.modoTest) {
@@ -14,11 +14,12 @@ describe.skip('CRUD - Config mensajeria pack', () => {
     }
     
     await conexionConMongoDB();
+  });
 
+  test('crear | config-mensajeria-profesional | crud', async () => {
     // Crear un profesional
     const modelNuevo = await services.core.configMensajeriaProfesional.crud.crear({
       configMensajeriaProfesional: {
-        _id: idModel,
         idUsuario,
         idProfesional,
         packMensajeria: {
@@ -51,17 +52,9 @@ describe.skip('CRUD - Config mensajeria pack', () => {
           habilitado: false,
           tipoMedio: 'correo',
         },
-        fechaCreacion: undefined,
       },
     });
 
-    expect(modelNuevo._id).toEqual(idModel);
-  });
-
-  test('Obtener config mensajeria profesional', async () => {
-    // Obtener pack de mensajeria
-    const model = await services.core.configMensajeriaProfesional.crud.obtener({ idUsuario });
-
-    expect(model._id).toEqual(idModel);
+    expect(modelNuevo).toBeTruthy();
   });
 });

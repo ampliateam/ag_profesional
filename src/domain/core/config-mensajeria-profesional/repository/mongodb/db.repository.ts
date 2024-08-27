@@ -13,9 +13,3 @@ export const actualizar = async (filtros: any, data: any, opciones?: any) => {
   const actualizados = await ConfigMensajeriaProfesionalModel.find(filtros);
   return actualizados.map(p => mongoToConfigMensajeriaProfesional(p));
 };
-
-export const eliminar = async (filtros: any) => {
-  const aEliminar = await ConfigMensajeriaProfesionalModel.find(filtros);
-  await ConfigMensajeriaProfesionalModel.deleteMany(filtros);
-  return aEliminar.map(p => mongoToConfigMensajeriaProfesional(p));
-};

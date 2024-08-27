@@ -13,9 +13,3 @@ export const actualizar = async (filtros: any, data: any, opciones?: any) => {
   const actualizados = await ServicioProfesionalModel.find(filtros);
   return actualizados.map(p => mongoToServicioProfesional(p));
 };
-
-export const eliminar = async (filtros: any) => {
-  const aEliminar = await ServicioProfesionalModel.find(filtros);
-  await ServicioProfesionalModel.deleteMany(filtros);
-  return aEliminar.map(p => mongoToServicioProfesional(p));
-};

@@ -39,12 +39,3 @@ export const actualizar = async (dto: ActualizarServicioProfesionalDTO): Promise
 
     return Object.assign(servicioProfesional, dto.actualizado);
 }
-
-export const eliminar = async (dto: BuscarServicioProfesionalDTO): Promise<IServicioProfesional> => {
-    const servicioProfesional: IServicioProfesional = await obtener(dto);
-    if (!servicioProfesional) return null;
-
-    await ServicioProfesionalModel.findByIdAndDelete(servicioProfesional._id);
-
-    return servicioProfesional;
-}

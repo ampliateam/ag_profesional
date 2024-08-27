@@ -18,23 +18,29 @@ const ProfesionalSchema = new Schema({
 }, { versionKey: false });
 
 // Crear un índice único compuesto
-ProfesionalSchema.index({ idUsuario: 1, etiqueta: 1, estado: 1 }, { unique: true });
+ProfesionalSchema.index({
+    idUsuario: 1,
+    etiqueta: 1,
+    estado: 1,
+}, {
+    unique: true,
+    partialFilterExpression: { estado: { $in: ['habilitado', 'deshabilitado'] } }
+});
 
 // Middleware pre-save para verificar duplicados
 ProfesionalSchema.pre('save', async function(next) {
     const doc = this;
     const exists = await ProfesionalModel.findOne({
+        _id: { $ne: doc._id }, // Excluir el documento actual en caso de actualización
         idUsuario: doc.idUsuario,
         etiqueta: doc.etiqueta,
-        estado: doc.estado,
-        _id: { $ne: doc._id } // Excluir el documento actual en caso de actualización
+        estado: { $in: ['habilitado', 'deshabilitado'] },
     });
 
-    if (exists) {
-        next(new Error('Ya existe un documento con el mismo idUsuario, etiqueta y estado.'));
-    } else {
-        next();
-    }
+    if (!exists) return next();
+
+    const err = new Error('Ya existe un documento con el mismo idUsuario, etiqueta y estado.');
+    return next(err);
 });
 
 export const ProfesionalModel = model(constants.nombreStore.profesional, ProfesionalSchema);

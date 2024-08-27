@@ -1,5 +1,4 @@
 import {
-    TProfesionalContactoPrioridad,
     TProfesionalContactoTipo,
     TProfesionalEstado,
     TProfesionalEtiqueta,
@@ -9,7 +8,6 @@ interface IProfesionalContacto {
     codigoTelefono: string | null;
     contacto: string;
     tipo: TProfesionalContactoTipo;
-    prioridad: TProfesionalContactoPrioridad;
 }
 
 interface IProfesionalDireccion {

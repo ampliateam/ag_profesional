@@ -8,7 +8,3 @@ export const obtener = async (dto: any): Promise<IConfigMensajeriaProfesional[]>
 export const actualizar = async (dto: any, data: any): Promise<IConfigMensajeriaProfesional[]> => {
   return await repository.db.actualizar(dto, data);
 };
-
-export const eliminar = async (dto: any): Promise<IConfigMensajeriaProfesional[]> => {
-  return await repository.db.eliminar(dto);
-};
