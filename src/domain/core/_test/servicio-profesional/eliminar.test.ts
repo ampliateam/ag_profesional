@@ -6,13 +6,14 @@ import { testRun } from "../config";
 const describeTest = testRun.servicioProfesional.eliminar ? describe : describe.skip;
 describeTest("CRUD - Servicio profesional", () => {
   const ids = [
-    '66cd26066e9ef9d474d6e430',
-    '66cd26477759ba884b96cd8f',
-    '66cd265f0fb6648d4dc82b02'
+    '66cf689b5b0836c9a3f48398',
+    '66cf68ae61a7db5c9145c142',
+    '66cf760202fb02f5cbe85ddf',
   ];
   const filter = {
-    idProfesional: '66cd19426e872951ab59711f',
-    nombreServicio: 'Servicio3',
+    idProfesional: '66cf5d3b551893628cf7c944',
+    nombreServicio: 'Servicio1',
+    estado: 'habilitado',
   };
 
   beforeAll(async () => {
@@ -45,13 +46,14 @@ describeTest("CRUD - Servicio profesional", () => {
           nombreServicioPorProfesional: {
             idProfesional: filter.idProfesional,
             nombreServicio: filter.nombreServicio,
-            estado: 'habilitado'
+            estado: filter.estado as any,
           },
         },
         fechaEliminacion: new Date(),
       });
 
       expect(ids).toContain(servicioProfesional._id);
+      expect(ids[2]).toEqual(servicioProfesional._id);
       expect('eliminado').toEqual(servicioProfesional.estado);
   });
 

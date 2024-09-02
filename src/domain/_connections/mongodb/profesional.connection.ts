@@ -1,9 +1,13 @@
 import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
+import {
+    verificarProfesionalDuplicadoCreacion,
+} from './middlewares/profesional';
 
 // Guardar el valor por defecto de cada campo aqui
 const defaultValue = {
     direccion: { referencia: '', ubicacion: [0,0] },
+    fechaCreacion: Date.now,
     fechaEliminacion: null,
 };
 
@@ -13,7 +17,7 @@ const ProfesionalSchema = new Schema({
     direccion: { type: Object, required: false, default: defaultValue.direccion },  // IProfesionalDireccion
     etiqueta: { type: String, required: true },                                     // TProfesionalEtiqueta
     estado: { type: String, required: true },                                       // TProfesionalEstado
-    fechaCreacion: { type: Date, required: true },
+    fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
     fechaEliminacion: { type: Date, required: false, default: defaultValue.fechaEliminacion },
 }, { versionKey: false });
 
@@ -29,18 +33,13 @@ ProfesionalSchema.index({
 
 // Middleware pre-save para verificar duplicados
 ProfesionalSchema.pre('save', async function(next) {
-    const doc = this;
-    const exists = await ProfesionalModel.findOne({
-        _id: { $ne: doc._id }, // Excluir el documento actual en caso de actualización
-        idUsuario: doc.idUsuario,
-        etiqueta: doc.etiqueta,
-        estado: { $in: ['habilitado', 'deshabilitado'] },
-    });
-
-    if (!exists) return next();
-
-    const err = new Error('Ya existe un documento con el mismo idUsuario, etiqueta y estado.');
-    return next(err);
+    try {
+        console.log('proceso [save]');
+        await verificarProfesionalDuplicadoCreacion(this);
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
 export const ProfesionalModel = model(constants.nombreStore.profesional, ProfesionalSchema);

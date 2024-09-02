@@ -6,12 +6,12 @@ import { testRun } from "../config";
 const describeTest = testRun.servicioProfesional.obtener ? describe : describe.skip;
 describeTest("Obtener servicio profesional", () => {
   const ids = [
-    '66cd26066e9ef9d474d6e430',
-    '66cd26477759ba884b96cd8f',
-    '66cd265f0fb6648d4dc82b02'
+    '66cf689b5b0836c9a3f48398',
+    '66cf68ae61a7db5c9145c142',
+    '66cf760202fb02f5cbe85ddf',
   ];
   const filter = {
-    idProfesional: '66cd19426e872951ab59711f',
+    idProfesional: '66cf5d3b551893628cf7c944',
     nombreServicio: 'Servicio1',
   };
 

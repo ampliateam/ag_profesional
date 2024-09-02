@@ -5,8 +5,8 @@ import { testRun } from "../config";
 
 const describeTest = testRun.servicioProfesional.crear ? describe : describe.skip;
 describeTest("Crear Servicio profesional", () => {
-  const idProfesional = '66cd19426e872951ab59711f';
-  const nombreServicio = "Servicio3";
+  const idProfesional = '66d5d0ec4d42a5566ca28eaa';
+  const nombreServicio = "Servicio1";
 
   beforeAll(async () => {
     if (!envs.modoTest) {
@@ -23,7 +23,7 @@ describeTest("Crear Servicio profesional", () => {
         servicioProfesional: {
           idProfesional,
           nombreServicio,
-          observacion: "Este servicio se enfoca el algo bueno que hago.",
+          observacion: "Este servicio se enfoca en algo bueno que hago.",
           estado: "habilitado",
           fechaCreacion: new Date(),
         },
