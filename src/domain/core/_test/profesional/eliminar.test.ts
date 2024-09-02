@@ -6,9 +6,9 @@ import { testRun } from "../config";
 const describeTest = testRun.profesional.eliminar ? describe : describe.skip;
 describeTest("CRUD - Profesional", () => {
   const ids = [
-    '66cd19426e872951ab59711f',
-    '66cd19b355327e5ef7b9d377',
-    '66cd19cc7afd9105182e2232',
+    '66cf5c6365ce0e28dbb2bbe3',
+    '66cf5d3b551893628cf7c944',
+    '66cf5e22b731b5cf995445b7',
   ];
 
   beforeAll(async () => {
@@ -20,10 +20,12 @@ describeTest("CRUD - Profesional", () => {
   });
 
   test("eliminar-logicamente | profesional", async () => {
+    const _id = ids[2];
+    
     // Eliminar
     const profesionalEliminado =
       await services.core.profesional.eliminarLogicamente({
-        buscarPor: { _id: ids[1] },
+        buscarPor: { _id },
         fechaEliminacion: new Date(),
       });
 

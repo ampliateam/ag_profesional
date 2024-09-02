@@ -5,13 +5,8 @@ export const testRun = {
     actualizar: false,
     eliminar: false,
   },
-  configMensajeriaProfesional: {
-    crear: false,
-    obtener: false,
-    actualizar: false,
-  },
   servicioProfesional: {
-    crear: false,
+    crear: true,
     obtener: false,
     actualizar: false,
     eliminar: false,

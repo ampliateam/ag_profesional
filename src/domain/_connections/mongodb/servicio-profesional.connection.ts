@@ -1,8 +1,10 @@
 import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
+import { verificarSPDuplicadoCreacion } from './middlewares/servicio-profesional';
 
 // Guardar el valor por defecto de cada campo aqui
-const dv = {
+const defaultValue = {
+    fechaCreacion: Date.now,
     fechaEliminacion: null,
 };
 
@@ -11,8 +13,8 @@ const ServicioProfesionalSchema = new Schema({
     nombreServicio: { type: String, required: true },
     observacion: { type: String, required: true },
     estado: { type: String, required: true },           // TServicioProfesionalEstado
-    fechaCreacion: { type: Date, required: true },
-    fechaEliminacion: { type: Date, required: false, default: dv.fechaEliminacion },
+    fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
+    fechaEliminacion: { type: Date, required: false, default: defaultValue.fechaEliminacion },
 }, { versionKey: false });
 
 // Crear un índice único compuesto
@@ -27,18 +29,13 @@ ServicioProfesionalSchema.index({
 
 // Middleware pre-save para verificar duplicados
 ServicioProfesionalSchema.pre('save', async function(next) {
-    const doc = this;
-    const exists = await ServicioProfesionalModel.findOne({
-        _id: { $ne: doc._id }, // Excluir el documento actual en caso de actualización
-        idProfesional: doc.idProfesional,
-        nombreServicio: doc.nombreServicio,
-        estado: { $in: ['habilitado', 'deshabilitado'] },
-    });
-
-    if (!exists) return next();
-
-    const err = new Error('Ya existe un documento con el mismo idProfesional, nombreServicio y estado.');
-    return next(err);
+    try {
+        console.log('proceso [save]');
+        await verificarSPDuplicadoCreacion(this);
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
 export const ServicioProfesionalModel = model(constants.nombreStore.servicioProfesional, ServicioProfesionalSchema);

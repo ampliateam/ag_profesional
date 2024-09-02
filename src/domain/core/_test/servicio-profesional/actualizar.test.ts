@@ -6,13 +6,14 @@ import { testRun } from "../config";
 const describeTest = testRun.servicioProfesional.actualizar ? describe : describe.skip;
 describeTest("CRUD - Servicio profesional", () => {
   const ids = [
-    '66cd26066e9ef9d474d6e430',
-    '66cd26477759ba884b96cd8f',
-    '66cd265f0fb6648d4dc82b02'
+    '66cf689b5b0836c9a3f48398',
+    '66cf68ae61a7db5c9145c142',
+    '66cf760202fb02f5cbe85ddf',
   ];
   const filter = {
-    idProfesional: '66cd19426e872951ab59711f',
+    idProfesional: '66cf5d3b551893628cf7c944',
     nombreServicio: 'Servicio1',
+    estado: 'habilitado',
   };
 
   beforeAll(async () => {
@@ -24,7 +25,7 @@ describeTest("CRUD - Servicio profesional", () => {
   });
 
   test("actualizar | servicio-profesional | crud", async () => {
-    const observacion = 'Este servicio se enfoca el algo bueno que hago. (Actualizado x2)';
+    const observacion = 'Este servicio se enfoca el algo bueno que hago. (Actualizado x1)';
 
     // Obtenemos el servicio de un profesional
     const servicioProfesional =
@@ -33,19 +34,20 @@ describeTest("CRUD - Servicio profesional", () => {
           nombreServicioPorProfesional: {
             idProfesional: filter.idProfesional,
             nombreServicio: filter.nombreServicio,
-            estado: 'habilitado'
+            estado: filter.estado as any,
           },
         },
         actualizado: { observacion }
       });
 
     expect(ids).toContain(servicioProfesional._id);
+    expect(ids[2]).toEqual(servicioProfesional._id);
     expect(observacion).toEqual(servicioProfesional.observacion);
   });
 
   test("actualizar | servicio-profesional | db-0", async () => {
     const _id = ids[1];
-    const observacion = 'Este servicio se enfoca el algo bueno que hago. (Actualizado x2)';
+    const observacion = 'Este servicio se enfoca el algo bueno que hago. (Actualizado x1)';
 
     // Obtenemos el servicio de un profesional
     const [servicioProfesional] =

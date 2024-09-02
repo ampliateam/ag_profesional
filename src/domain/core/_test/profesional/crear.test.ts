@@ -31,7 +31,7 @@ describeTest("CRUD - Profesional", () => {
           referencia: "",
           ubicacion: [0, 0],
         },
-        etiqueta: 'nutricion',
+        etiqueta: 'odontologia',
         estado: "habilitado",
         fechaCreacion: new Date(),
         fechaEliminacion: null,
