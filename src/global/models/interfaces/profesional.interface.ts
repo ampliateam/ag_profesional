@@ -21,6 +21,8 @@ export interface IProfesional {
     contactos: IProfesionalContacto[];
     direccion: IProfesionalDireccion;
     etiqueta: TProfesionalEtiqueta;
+    fotoPerfil: string;
+    fotoPortada: string;
     estado: TProfesionalEstado;
     fechaCreacion: Date;
     fechaEliminacion: Date | null;
@@ -32,6 +34,8 @@ export interface IProfesionalOpcional {
     contactos?: IProfesionalContacto[];
     direccion?: IProfesionalDireccion;
     etiqueta?: TProfesionalEtiqueta;
+    fotoPerfil?: string;
+    fotoPortada?: string;
     estado?: TProfesionalEstado;
     fechaCreacion?: Date;
     fechaEliminacion?: Date | null;
