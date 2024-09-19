@@ -6,7 +6,6 @@ import {
 
 // Guardar el valor por defecto de cada campo aqui
 const defaultValue = {
-    direccion: { referencia: '', ubicacion: [0,0] },
     fotoPerfil: '',
     fotoPortada: '',
     estado: 'habilitado',
@@ -17,7 +16,6 @@ const defaultValue = {
 const ProfesionalSchema = new Schema({
     idUsuario: { type: String, required: true },
     contactos: { type: Array, required: true },                                     // IProfesionalContacto[]
-    direccion: { type: Object, required: false, default: defaultValue.direccion },  // IProfesionalDireccion
     etiqueta: { type: String, required: true },                                     // TProfesionalEtiqueta
     estado: { type: String, required: false, default: defaultValue.estado },                                       // TProfesionalEstado
     fotoPerfil: { type: String, required: false, default: defaultValue.fotoPerfil },

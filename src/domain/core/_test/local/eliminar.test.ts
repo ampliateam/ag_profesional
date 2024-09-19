@@ -3,12 +3,12 @@ import { conexionConMongoDB } from "@global/connections/mongodb.connection";
 import { services } from "@domain/services";
 import { testRun } from "../config";
 
-const describeTest = testRun.profesional.eliminar ? describe : describe.skip;
-describeTest("CRUD - Profesional", () => {
+const describeTest = testRun.local.eliminar ? describe : describe.skip;
+describeTest("CRUD", () => {
   const ids = [
-    '66e86ea0ece7cbe583318492',
-    '66e86efc244f0af29e306bc8',
-    '66e86fb3722a859a6ddc3fd9',
+    '66e901676f02a8a44a13a428',
+    '66e901d0e9ca1170cabb4aef',
+    '66e9035c7e446aa38d74331f',
   ];
 
   beforeAll(async () => {
@@ -19,17 +19,18 @@ describeTest("CRUD - Profesional", () => {
     await conexionConMongoDB();
   });
 
-  test("eliminar-logicamente | profesional", async () => {
+  test("eliminar-logicamente | local", async () => {
     const _id = ids[2];
     
     // Eliminar
-    const profesionalEliminado =
-      await services.core.profesional.eliminarLogicamente({
+    const eliminado =
+      await services.core.local.eliminarLogicamente({
         buscarPor: { _id },
         fechaEliminacion: new Date(),
       });
 
-    expect(ids).toContain(profesionalEliminado._id);
-    expect(profesionalEliminado.estado).toEqual("eliminado");
+    expect(ids).toContain(eliminado._id);
+    expect(_id).toEqual(eliminado._id);
+    expect(eliminado.estado).toEqual("eliminado");
   });
 });
