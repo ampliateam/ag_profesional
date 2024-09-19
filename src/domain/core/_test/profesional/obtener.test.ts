@@ -7,9 +7,9 @@ const describeTest = testRun.profesional.obtener ? describe : describe.skip;
 describeTest("CRUD - Profesional", () => {
   const idUsuario = "123456";
   const ids = [
-    '66cf5c6365ce0e28dbb2bbe3',
-    '66cf5d3b551893628cf7c944',
-    '66cf5e22b731b5cf995445b7',
+    '66e86ea0ece7cbe583318492',
+    '66e86efc244f0af29e306bc8',
+    '66e86fb3722a859a6ddc3fd9',
   ];
 
   beforeAll(async () => {

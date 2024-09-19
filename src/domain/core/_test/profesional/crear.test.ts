@@ -27,11 +27,7 @@ describeTest("CRUD - Profesional", () => {
             tipo: "telefono-movil",
           },
         ],
-        direccion: {
-          referencia: "",
-          ubicacion: [0, 0],
-        },
-        etiqueta: 'odontologia',
+        etiqueta: 'otro',
         estado: "habilitado",
         fechaCreacion: new Date(),
         fechaEliminacion: null,

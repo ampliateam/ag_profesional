@@ -8,35 +8,28 @@ interface IProfesionalContacto {
     codigoTelefono: string | null;
     contacto: string;
     tipo: TProfesionalContactoTipo;
-}
-
-interface IProfesionalDireccion {
-    referencia: string;
-    ubicacion: [number, number] | null;
-}
+};
 
 export interface IProfesional {
     _id: string;
     idUsuario: string;
-    contactos: IProfesionalContacto[];
-    direccion: IProfesionalDireccion;
     etiqueta: TProfesionalEtiqueta;
     fotoPerfil: string;
     fotoPortada: string;
+    contactos: IProfesionalContacto[];
     estado: TProfesionalEstado;
     fechaCreacion: Date;
     fechaEliminacion: Date | null;
-}
+};
 
 export interface IProfesionalOpcional {
     _id?: string;
     idUsuario?: string;
-    contactos?: IProfesionalContacto[];
-    direccion?: IProfesionalDireccion;
     etiqueta?: TProfesionalEtiqueta;
     fotoPerfil?: string;
     fotoPortada?: string;
+    contactos?: IProfesionalContacto[];
     estado?: TProfesionalEstado;
     fechaCreacion?: Date;
     fechaEliminacion?: Date | null;
-}
+};

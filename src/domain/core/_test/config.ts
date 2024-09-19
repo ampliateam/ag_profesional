@@ -1,6 +1,6 @@
 export const testRun = {
   profesional: {
-    crear: true,
+    crear: false,
     obtener: false,
     actualizar: false,
     eliminar: false,
@@ -10,5 +10,11 @@ export const testRun = {
     obtener: false,
     actualizar: false,
     eliminar: false,
-  }
+  },
+  local: {
+    crear: false,
+    obtener: false,
+    actualizar: false,
+    eliminar: false,
+  },
 };

@@ -15,8 +15,7 @@ export const obtener = async (dto: BuscarProfesionalDTO): Promise<IProfesional> 
     else if (dto.idUsuario && dto.etiqueta) {
         filtros.idUsuario = dto.idUsuario;
         filtros.etiqueta = dto.etiqueta;
-    }
-    else return null;
+    } else return null;
 
     // Obtener todos los profesionales que tengan estado "habilitado" o "deshabilitado"
     filtros['$or'] = [
