@@ -1,18 +1,25 @@
 import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
 import { verificarSPDuplicadoCreacion } from './middlewares/servicio-profesional';
+import { IServicioProfesional } from '@global/models/interfaces';
+import { TServicioProfesionalEstado } from '@global/models/types';
 
-// Guardar el valor por defecto de cada campo aqui
+// Definir la interfaz para el documento
+interface IServicioProfesionalMongoose extends Document, Omit<IServicioProfesional, '_id'> {};
+
+// Guardar el valor por defecto de cada campo aqui (para los required=false)
 const defaultValue = {
+    estado: 'habilitado' as TServicioProfesionalEstado,
     fechaCreacion: Date.now,
     fechaEliminacion: null,
 };
 
-const ServicioProfesionalSchema = new Schema({
+// Schema de mongoose
+const ServicioProfesionalSchema = new Schema<IServicioProfesionalMongoose>({
     idProfesional: { type: String, required: true },
     nombreServicio: { type: String, required: true },
     observacion: { type: String, required: true },
-    estado: { type: String, required: true },           // TServicioProfesionalEstado
+    estado: { type: String, required: false, default: defaultValue.estado },           // TServicioProfesionalEstado
     fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
     fechaEliminacion: { type: Date, required: false, default: defaultValue.fechaEliminacion },
 }, { versionKey: false });
@@ -38,4 +45,7 @@ ServicioProfesionalSchema.pre('save', async function(next) {
     }
 });
 
-export const ServicioProfesionalModel = model(constants.nombreStore.servicioProfesional, ServicioProfesionalSchema);
+export const ServicioProfesionalModel = model<IServicioProfesionalMongoose>(
+    constants.nombreStore.servicioProfesional,
+    ServicioProfesionalSchema
+);

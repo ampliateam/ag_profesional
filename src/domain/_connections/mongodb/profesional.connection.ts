@@ -3,23 +3,29 @@ import { constants } from '@global/configs/constants';
 import {
     verificarProfesionalDuplicadoCreacion,
 } from './middlewares/profesional';
+import { IProfesional } from '@global/models/interfaces';
+import { TProfesionalContacto, TProfesionalEstado } from '@global/models/types';
 
-// Guardar el valor por defecto de cada campo aqui
+// Definir la interfaz para el documento
+interface IProfesionalMongoose extends Document, Omit<IProfesional, '_id'> {};
+
+// Guardar el valor por defecto de cada campo aqui (para los required=false)
 const defaultValue = {
     fotoPerfil: '',
     fotoPortada: '',
-    estado: 'habilitado',
+    estado: 'habilitado' as TProfesionalEstado,
     fechaCreacion: Date.now,
     fechaEliminacion: null,
 };
 
-const ProfesionalSchema = new Schema({
+// Schema de mongoose
+const ProfesionalSchema = new Schema<IProfesionalMongoose>({
     idUsuario: { type: String, required: true },
-    contactos: { type: Array, required: true },                                     // IProfesionalContacto[]
     etiqueta: { type: String, required: true },                                     // TProfesionalEtiqueta
-    estado: { type: String, required: false, default: defaultValue.estado },                                       // TProfesionalEstado
     fotoPerfil: { type: String, required: false, default: defaultValue.fotoPerfil },
     fotoPortada: { type: String, required: false, default: defaultValue.fotoPortada },
+    contactos: { type: Array as unknown as TProfesionalContacto[], required: true },                                     // IProfesionalContacto[]
+    estado: { type: String, required: false, default: defaultValue.estado },                                       // TProfesionalEstado
     fechaCreacion: { type: Date, required: false, default: defaultValue.fechaCreacion },
     fechaEliminacion: { type: Date, required: false, default: defaultValue.fechaEliminacion },
 }, { versionKey: false });
@@ -45,4 +51,7 @@ ProfesionalSchema.pre('save', async function(next) {
     }
 });
 
-export const ProfesionalModel = model(constants.nombreStore.profesional, ProfesionalSchema);
+export const ProfesionalModel = model<IProfesionalMongoose>(
+    constants.nombreStore.profesional,
+    ProfesionalSchema
+);

@@ -1,14 +1,8 @@
 import {
-    TProfesionalContactoTipo,
+    TProfesionalContacto,
     TProfesionalEstado,
     TProfesionalEtiqueta,
 } from "@global/models/types";
-
-interface IProfesionalContacto {
-    codigoTelefono: string | null;
-    contacto: string;
-    tipo: TProfesionalContactoTipo;
-};
 
 export interface IProfesional {
     _id: string;
@@ -16,7 +10,7 @@ export interface IProfesional {
     etiqueta: TProfesionalEtiqueta;
     fotoPerfil: string;
     fotoPortada: string;
-    contactos: IProfesionalContacto[];
+    contactos: TProfesionalContacto[];
     estado: TProfesionalEstado;
     fechaCreacion: Date;
     fechaEliminacion: Date | null;
@@ -28,7 +22,7 @@ export interface IProfesionalOpcional {
     etiqueta?: TProfesionalEtiqueta;
     fotoPerfil?: string;
     fotoPortada?: string;
-    contactos?: IProfesionalContacto[];
+    contactos?: TProfesionalContacto[];
     estado?: TProfesionalEstado;
     fechaCreacion?: Date;
     fechaEliminacion?: Date | null;
