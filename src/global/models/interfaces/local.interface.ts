@@ -1,23 +1,16 @@
-import { TLocalContactoTipo, TLocalEstado } from '@global/models/types';
-
-interface ILocalDireccion {
-  referencia: string;
-  ubicacion: [number, number] | null;
-};
-
-interface ILocalContacto {
-  codigoTelefono: string | null;
-  contacto: string;
-  tipo: TLocalContactoTipo;
-};
+import {
+  TLocalContacto,
+  TLocalDireccion,
+  TLocalEstado
+} from '@global/models/types';
 
 export interface ILocal {
   _id: string;
   idProfesional: string;
   nombre: string;
   descripcion: string;
-  direccion: ILocalDireccion | null;
-  contactos: ILocalContacto[];
+  direccion: TLocalDireccion | null;
+  contactos: TLocalContacto[];
   estado: TLocalEstado;
   fechaCreacion: Date;
   fechaEliminacion: Date | null;
@@ -28,8 +21,8 @@ export interface ILocalOpcional {
   idProfesional?: string;
   nombre?: string;
   descripcion?: string;
-  direccion?: ILocalDireccion;
-  contactos?: ILocalContacto[];
+  direccion?: TLocalDireccion;
+  contactos?: TLocalContacto[];
   estado?: TLocalEstado;
   fechaCreacion?: Date;
   fechaEliminacion?: Date | null;
