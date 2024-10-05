@@ -16,7 +16,7 @@ const constantes = {
 };
 
 if (envs.modoTest) {
-    constantes.nombreStore.parametroSistema += '_test';
+    // No agregar el de `ParametrosSistema`
     constantes.nombreStore.profesional += '_test';
     constantes.nombreStore.servicioProfesional += '_test';
     constantes.nombreStore.locales += '_test';

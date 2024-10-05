@@ -1,4 +1,4 @@
-import { ILocal } from '@global/models/interfaces';
+import { ILocal } from '@global/models/ag_profesional';
 import {
     CrearLocalDTO,
     BuscarLocalDTO,

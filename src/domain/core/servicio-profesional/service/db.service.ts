@@ -1,4 +1,4 @@
-import { IServicioProfesional } from "@global/models/interfaces";
+import { IServicioProfesional } from "@global/models/ag_profesional";
 import * as repository from '../repository/mongodb';
 
 export const obtener = async (dto: any): Promise<IServicioProfesional[]> => {

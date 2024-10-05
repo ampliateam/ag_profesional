@@ -3,8 +3,7 @@ import { constants } from '@global/configs/constants';
 import {
     verificarProfesionalDuplicadoCreacion,
 } from './middlewares/profesional';
-import { IProfesional } from '@global/models/interfaces';
-import { TProfesionalContacto, TProfesionalEstado } from '@global/models/types';
+import { IProfesional, TProfesionalContacto, TProfesionalEstado } from '@global/models/ag_profesional';
 
 // Definir la interfaz para el documento
 interface IProfesionalMongoose extends Document, Omit<IProfesional, '_id'> {};

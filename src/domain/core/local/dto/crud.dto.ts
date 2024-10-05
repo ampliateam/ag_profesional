@@ -1,4 +1,4 @@
-import { ILocalOpcional } from "@global/models/interfaces";
+import { ILocalOpcional } from "@global/models/ag_profesional";
 
 export interface CrearLocalDTO {
     local: ILocalOpcional;

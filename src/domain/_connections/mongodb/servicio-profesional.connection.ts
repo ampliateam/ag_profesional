@@ -1,8 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
 import { verificarSPDuplicadoCreacion } from './middlewares/servicio-profesional';
-import { IServicioProfesional } from '@global/models/interfaces';
-import { TServicioProfesionalEstado } from '@global/models/types';
+import { IServicioProfesional, TServicioProfesionalEstado } from '@global/models/ag_profesional';
 
 // Definir la interfaz para el documento
 interface IServicioProfesionalMongoose extends Document, Omit<IServicioProfesional, '_id'> {};

@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { constants } from '@global/configs/constants';
-import { ILocal } from '@global/models/interfaces';
-import { TLocalContacto, TLocalEstado } from '@global/models/types';
+import { ILocal, TLocalContacto, TLocalEstado } from '@global/models/ag_profesional';
 
 // Definir la interfaz para el documento
 interface ILocalMongoose extends Document, Omit<ILocal, '_id'> {};

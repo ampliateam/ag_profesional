@@ -1,5 +1,4 @@
-import { IServicioProfesionalOpcional } from "@global/models/interfaces";
-import { TServicioProfesionalEstado } from "@global/models/types";
+import { IServicioProfesionalOpcional, TServicioProfesionalEstado } from "@global/models/ag_profesional";
 
 export interface CrearServicioProfesionalDTO {
     servicioProfesional: IServicioProfesionalOpcional;

@@ -1,9 +1,9 @@
 import {
     ILocal,
+    IParametroSistema,
     IProfesional,
     IServicioProfesional
-} from "@global/models/interfaces";
-import { IParametroSistema } from "@domain/_models/interfaces";
+} from "@global/models/ag_profesional";
 
 const mongoToModel = (mongo: any) => {
     if (!mongo) return null;
